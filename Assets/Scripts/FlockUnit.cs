@@ -162,7 +162,7 @@ public class FlockUnit : MonoBehaviour
         return avoidanceVector;
     }
 
-    private Vector3 CalculateBoundsVector()
+    private Vector3 CalculateBoundsVector() //Calucated direction from current position to the center of the flock
     {
         var offsetToCenter = assignedFlock.transform.position - myTransform.position;
         bool isNearCenter = (offsetToCenter.magnitude >= assignedFlock.boundsDistance * 0.9f);
