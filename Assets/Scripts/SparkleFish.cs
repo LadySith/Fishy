@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class SparkleFish : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] ParticleSystem sparkleParticle = null;
+
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.tag == "player")
+        {
+            Debug.Log("Player collided with " + collision.gameObject.name);
+            Sparkle();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Sparkle()
     {
-        
+        sparkleParticle.Play();
     }
 }
