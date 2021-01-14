@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class SparkleFish : MonoBehaviour
 {
-    [SerializeField] ParticleSystem sparkleParticle = null;
+    public ParticleSystem sparkleParticle;
 
-    private void OnCollisionEnter(Collision collision)
+    void Awake()
     {
-        if (collision.gameObject.tag == "player")
+        sparkleParticle = GetComponent<ParticleSystem>();
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag == "player")
         {
-            Debug.Log("Player collided with " + collision.gameObject.name);
+            Debug.Log("Player collided with " + this.gameObject.name);
             Sparkle();
         }
     }
