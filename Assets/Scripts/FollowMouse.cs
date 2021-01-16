@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Tobii.Gaming;
 
 public class FollowMouse : MonoBehaviour
 {
@@ -43,13 +44,29 @@ public class FollowMouse : MonoBehaviour
         }
         else
         {
-            //if tobii gaze
-            if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, interactiveLayer) && (Vector3.Distance(new Vector3(hit.point.x, hit.point.y, hit.point.z), transform.position)) > stopping_distance)
+            if (TobiiAPI.IsConnected)
             {
-                targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                Debug.Log("Tobii eyetracker detected");
+                GazePoint gazePoint = TobiiAPI.GetGazePoint();
+                if (gazePoint.IsRecent())
+                {
+                    //Here we use the eyetracking point to move the cursor
+
+                    // Note: Values can be negative if the user looks outside the game view. 
+                    // print("Gaze point on Screen (X,Y): " + gazePoint.Screen.x + ", " + gazePoint.Screen.y);
+                }
             }
-            transform.LookAt(targetPosition);
+            else
+            {
+                Debug.Log("Eyetracker not connected");
+                if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, interactiveLayer) && (Vector3.Distance(new Vector3(hit.point.x, hit.point.y, hit.point.z), transform.position)) > stopping_distance)
+                {
+                    targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                }
+                transform.LookAt(targetPosition);
+            }
+            
         }
 
     }
