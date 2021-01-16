@@ -29,13 +29,28 @@ public class FollowMouse : MonoBehaviour
 
         //Add if for NUI Manager (value NUI). If Touch NUI manager is touch, make target go to that position on mousedown, else use Tobii Gaze position consistently
 
-        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, interactiveLayer) && (Vector3.Distance(new Vector3(hit.point.x, hit.point.y, hit.point.z), transform.position)) > stopping_distance)
+        if (valueNUI == 1)
         {
-            targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, interactiveLayer) && (Vector3.Distance(new Vector3(hit.point.x, hit.point.y, hit.point.z), transform.position)) > stopping_distance)
+                {
+                    targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+                }
+            }
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            transform.LookAt(targetPosition);
+        }
+        else
+        {
+            //if tobii gaze
+            if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, interactiveLayer) && (Vector3.Distance(new Vector3(hit.point.x, hit.point.y, hit.point.z), transform.position)) > stopping_distance)
+            {
+                targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            }
+            transform.LookAt(targetPosition);
         }
 
-        targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-        transform.LookAt(targetPosition);
     }
 }

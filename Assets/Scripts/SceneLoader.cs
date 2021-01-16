@@ -27,6 +27,12 @@ public class SceneLoader : MonoBehaviour
         Debug.Log("Instructions: " + NUIManager.Instance.someWord);
     }
 
+    public void LoadHomeScreen()
+    {
+        SceneManager.LoadScene("Menu Scene");
+        Debug.Log("Go home ET");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
