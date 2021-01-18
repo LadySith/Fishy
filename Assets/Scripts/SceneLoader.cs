@@ -30,7 +30,7 @@ public class SceneLoader : MonoBehaviour
     public void LoadHomeScreen()
     {
         SceneManager.LoadScene("Menu Scene");
-        Debug.Log("Go home ET");
+        Debug.Log("ET phone home");
     }
 
     public void QuitGame()
