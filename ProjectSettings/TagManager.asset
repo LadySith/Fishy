@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Height
   - player
+  - gamemusic
   layers:
   - Default
   - TransparentFX
