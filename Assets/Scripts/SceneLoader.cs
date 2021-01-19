@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+
     public void LoadTouchGame()
     {
         NUIManager.Instance.typeOfNUI = 1;

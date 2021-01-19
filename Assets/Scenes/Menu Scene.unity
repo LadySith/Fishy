@@ -1224,7 +1224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &865890020
 Transform:
   m_ObjectHideFlags: 0
@@ -2691,6 +2691,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d45e208fb026c4aa2d7db5dc35335e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionSquare: {fileID: 1693251814}
+  transitionTime: 1
 --- !u!4 &1757283543
 Transform:
   m_ObjectHideFlags: 0
@@ -2754,7 +2756,7 @@ GameObject:
   - component: {fileID: 1915464215}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: outTransition
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2791,7 +2793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

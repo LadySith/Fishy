@@ -7,6 +7,19 @@ TagManager:
   - Height
   - player
   - gamemusic
+  - outTransition
+  - inTransition
+  - touchButton
+  - mainMenu
+  - touchCyan
+  - eyeButton
+  - eyeCyan
+  - touchMenu
+  - beginTouch
+  - backTouch
+  - eyeMenu
+  - beginEye
+  - backEye
   layers:
   - Default
   - TransparentFX
