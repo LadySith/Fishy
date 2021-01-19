@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TweenScripts : MonoBehaviour
 {
     public float tweenDuration;
+    public Animator transition;
 
     GameObject mainMenu;
     GameObject touchButton;
@@ -41,6 +43,8 @@ public class TweenScripts : MonoBehaviour
     public void SelectTouch()
     {
         StartCoroutine(PlaySelectTouch());
+        NUIManager.Instance.typeOfNUI = 1;
+        NUIManager.Instance.someWord = "Tap the screen";
     }
 
     IEnumerator PlaySelectTouch()
@@ -75,6 +79,8 @@ public class TweenScripts : MonoBehaviour
     public void SelectEye()
     {
         StartCoroutine(PlaySelectEye());
+        NUIManager.Instance.typeOfNUI = 2;
+        NUIManager.Instance.someWord = "Look around";
     }
 
     IEnumerator PlaySelectEye()
@@ -107,12 +113,12 @@ public class TweenScripts : MonoBehaviour
 
     public void BeginTouch()
     {
-
+        StartCoroutine(PlayBeginTouch());
     }
 
     public void BeginEye()
     {
-
+        StartCoroutine(PlayBeginEye());
     }
 
     public void BackTouch()
@@ -141,5 +147,39 @@ public class TweenScripts : MonoBehaviour
         LeanTween.scale(backTouch, Vector3.one * 1.2f, tweenDuration).setEasePunch();
         yield return new WaitForSeconds(tweenDuration + 0.5f);
         StartCoroutine(CloseTouchPanel());
+    }
+
+    IEnumerator PlayBeginEye()
+    {
+        LeanTween.cancel(beginEye); //make sure this references the correct object when needed
+        beginEye.transform.localScale = Vector3.one;
+        LeanTween.scale(beginEye, Vector3.one * 1.2f, tweenDuration).setEasePunch();
+        yield return new WaitForSeconds(tweenDuration + 0.5f);
+        StartCoroutine(TransitionToEye());
+    }
+
+    IEnumerator TransitionToEye()
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(0.8f);
+        SceneManager.LoadScene("Main Game");
+        Debug.Log("Starting Game With Eye-Tracking");
+    }
+
+    IEnumerator PlayBeginTouch()
+    {
+        LeanTween.cancel(beginTouch); //make sure this references the correct object when needed
+        beginTouch.transform.localScale = Vector3.one;
+        LeanTween.scale(beginTouch, Vector3.one * 1.2f, tweenDuration).setEasePunch();
+        yield return new WaitForSeconds(tweenDuration + 0.5f);
+        StartCoroutine(TransitionToTouch());
+    }
+
+    IEnumerator TransitionToTouch()
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(0.8f);
+        SceneManager.LoadScene("Main Game");
+        Debug.Log("Starting Game With Touch");
     }
 }

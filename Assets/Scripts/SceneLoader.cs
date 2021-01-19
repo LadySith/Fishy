@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public Animator transition;
 
     public void LoadTouchGame()
     {
@@ -20,7 +21,7 @@ public class SceneLoader : MonoBehaviour
     public void LoadEyeGame()
     {
         NUIManager.Instance.typeOfNUI = 2;
-        NUIManager.Instance.someWord = "Look around the pond";
+        NUIManager.Instance.someWord = "Look around";
         SceneManager.LoadScene("Main Game");
 
         Debug.Log("Opened Eye-Tracking Game");
@@ -30,6 +31,13 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadHomeScreen()
     {
+        StartCoroutine(PlayGoHome());
+    }
+
+    IEnumerator PlayGoHome()
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(0.8f);
         SceneManager.LoadScene("Menu Scene");
         Debug.Log("ET phone home");
     }
