@@ -1397,6 +1397,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8482524892524054799, guid: e60c421755a2d8b4795bbde68f51dab4,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8482524893228226016, guid: e60c421755a2d8b4795bbde68f51dab4,
         type: 3}
       propertyPath: m_Name
@@ -2273,7 +2278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerToFollow: {fileID: 1112058282}
-  speed: 3.5
+  speed: 4.5
   followDistance: 5
 --- !u!4 &2050170491
 Transform:
@@ -2531,6 +2536,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767867737248371185, guid: 0fb67ca54160b8246aa6219ce5a450c5,
+        type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767867737248371185, guid: 0fb67ca54160b8246aa6219ce5a450c5,
+        type: 3}
+      propertyPath: stopping_distance
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1767867737248371196, guid: 0fb67ca54160b8246aa6219ce5a450c5,
         type: 3}
