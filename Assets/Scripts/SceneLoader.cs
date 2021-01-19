@@ -31,6 +31,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadHomeScreen()
     {
+        FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
         StartCoroutine(PlayGoHome());
     }
 

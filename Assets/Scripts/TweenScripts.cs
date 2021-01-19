@@ -42,6 +42,7 @@ public class TweenScripts : MonoBehaviour
 
     public void SelectTouch()
     {
+        FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
         StartCoroutine(PlaySelectTouch());
         NUIManager.Instance.typeOfNUI = 1;
         NUIManager.Instance.someWord = "Tap the screen";
@@ -78,6 +79,7 @@ public class TweenScripts : MonoBehaviour
 
     public void SelectEye()
     {
+        FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
         StartCoroutine(PlaySelectEye());
         NUIManager.Instance.typeOfNUI = 2;
         NUIManager.Instance.someWord = "Look around";
@@ -113,21 +115,25 @@ public class TweenScripts : MonoBehaviour
 
     public void BeginTouch()
     {
+        FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
         StartCoroutine(PlayBeginTouch());
     }
 
     public void BeginEye()
     {
+        FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
         StartCoroutine(PlayBeginEye());
     }
 
     public void BackTouch()
     {
+        FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
         StartCoroutine(PlayBackTouch());
     }
 
     public void BackEye()
     {
+        FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
         StartCoroutine(PlayBackEye());
     }
 
