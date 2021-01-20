@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &61389464
 RectTransform:
   m_ObjectHideFlags: 0
@@ -563,7 +563,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &249137994
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1361,6 +1361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 818092536}
   - component: {fileID: 818092537}
+  - component: {fileID: 818092538}
   m_Layer: 5
   m_Name: EyeButton
   m_TagString: eyeButton
@@ -1444,6 +1445,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &818092538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818092535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c889bf034c30df479e06a76a9844075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Image: {fileID: 2141476115}
 --- !u!1 &924764544
 GameObject:
   m_ObjectHideFlags: 0
@@ -2791,7 +2805,7 @@ GameObject:
   - component: {fileID: 1816150563}
   - component: {fileID: 1816150562}
   m_Layer: 5
-  m_Name: Text
+  m_Name: OverheadText
   m_TagString: overtext
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2837,7 +2851,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 47b13149bd7596046bf9471fb449faa2, type: 3}
-    m_FontSize: 100
+    m_FontSize: 60
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -2848,7 +2862,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Eyetracker detected
+  m_Text: Welcome
 --- !u!222 &1816150563
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2872,7 +2886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1832684495
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3036,6 +3050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2125720806}
   - component: {fileID: 2125720807}
+  - component: {fileID: 2125720808}
   m_Layer: 5
   m_Name: TouchButton
   m_TagString: touchButton
@@ -3119,6 +3134,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2125720808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125720805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c889bf034c30df479e06a76a9844075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Image: {fileID: 61389463}
 --- !u!1 &2141476115
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,7 +3164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2141476116
 RectTransform:
   m_ObjectHideFlags: 0
