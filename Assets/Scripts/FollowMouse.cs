@@ -11,6 +11,7 @@ public class FollowMouse : MonoBehaviour
     //public float rotationOffset;
     private Vector3 targetPosition;
     private int valueNUI; //1 = Touch, 2 = Eye-Tracking
+    Vector2 filteredpoint;
 
     public LayerMask interactiveLayer;
 
@@ -50,11 +51,12 @@ public class FollowMouse : MonoBehaviour
             if (TobiiAPI.IsConnected)
             {
                 Debug.Log("Tobii eyetracker detected");
-                GazePoint gazePoint = TobiiAPI.GetGazePoint();
+                Vector2 gazePoint = TobiiAPI.GetGazePoint().Screen;
+                filteredpoint = Vector2.Lerp(filteredpoint, gazePoint, 0.5f);
 
-                Ray castPointTobii = Camera.main.ScreenPointToRay(new Vector3(gazePoint.Screen.x,gazePoint.Screen.y,0));
+                Ray castPointTobii = Camera.main.ScreenPointToRay(new Vector3(filteredpoint.x,filteredpoint.y,0));
                 RaycastHit hitTobii;
-                if (gazePoint.IsRecent())
+                if (TobiiAPI.GetGazePoint().IsRecent())
                 {
                     //Here we use the eyetracking point to move the cursor
                     if (Physics.Raycast(castPointTobii, out hitTobii, Mathf.Infinity, interactiveLayer) && (Vector3.Distance(new Vector3(hitTobii.point.x, hitTobii.point.y, hitTobii.point.z), transform.position)) > stopping_distance)

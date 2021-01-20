@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Tobii.Gaming;
 
 public class TweenScripts : MonoBehaviour
 {
@@ -34,14 +35,25 @@ public class TweenScripts : MonoBehaviour
         backEye = GameObject.FindGameObjectWithTag("backEye");
         eyeMenu.SetActive(false);
         mainMenu = GameObject.FindGameObjectWithTag("mainMenu");
-        overText = GameObject.Find("overtext").GetComponent<Text>();
+        overText = GameObject.Find("OverheadText").GetComponent<Text>();
         overText.text = "";
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (TobiiAPI.IsConnected && NUIManager.Instance.typeOfNUI == 2)
+        {
+            NUIManager.Instance.someWord = "Eyetracker detected";
+            overText.text = NUIManager.Instance.someWord;
+        }
+
+        if ((!TobiiAPI.IsConnected) && NUIManager.Instance.typeOfNUI == 2)
+        {
+            NUIManager.Instance.someWord = "No eyetracker detected - Mouse override";
+            overText.text = NUIManager.Instance.someWord;
+        }
+
     }
 
     public void SelectTouch()
@@ -50,7 +62,7 @@ public class TweenScripts : MonoBehaviour
         StartCoroutine(PlaySelectTouch());
         NUIManager.Instance.typeOfNUI = 1;
         NUIManager.Instance.someWord = "Touch Mode";
-        overText.text = "Eyetracker mode";
+        overText.text = NUIManager.Instance.someWord;
     }
 
     IEnumerator PlaySelectTouch()
@@ -87,8 +99,6 @@ public class TweenScripts : MonoBehaviour
         FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
         StartCoroutine(PlaySelectEye());
         NUIManager.Instance.typeOfNUI = 2;
-        NUIManager.Instance.someWord = "Eyetracker mode";
-        overText.text = "Eyetracker mode";
     }
 
     IEnumerator PlaySelectEye()
