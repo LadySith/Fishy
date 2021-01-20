@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject Image;
+    private IEnumerator coroutine;
     //private bool tweening;
 
     // Start is called before the first frame update
@@ -49,8 +50,10 @@ public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         if (NUIManager.Instance.typeOfNUI == 2)
         {
-            LeanTween.scale(Image, Vector3.one, 2.5f).setEaseOutQuad();
-            Debug.Log("Pointer Entered Button: " + gameObject.name);
+            LeanTween.scale(Image, Vector3.one, 3f).setEaseOutQuad();
+            //Debug.Log("Pointer Entered Button: " + gameObject.name);
+            coroutine = CountToSelect();
+            StartCoroutine(coroutine);
         }
 
         else
@@ -63,9 +66,10 @@ public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         if (NUIManager.Instance.typeOfNUI == 2)
         {
+            StopCoroutine(coroutine);
             LeanTween.cancel(Image);
             LeanTween.scale(Image, Vector3.zero, 0.5f).setEaseOutExpo();
-            Debug.Log("Pointer Exited Button: " + gameObject.name);
+            //Debug.Log("Pointer Exited Button: " + gameObject.name);
         }
 
         else
@@ -79,12 +83,12 @@ public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         yield return new WaitForSeconds(3);
         if (this.gameObject.name == "TouchButton")
         {
-
+            Debug.Log("Touch Button Pressed");
         }
 
         if (this.gameObject.name == "EyeButton")
         {
-
+            Debug.Log("Eye Button Pressed");
         }
 
     }
