@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class TweenScripts : MonoBehaviour
@@ -17,6 +18,7 @@ public class TweenScripts : MonoBehaviour
     GameObject eyeMenu;
     GameObject beginEye;
     GameObject backEye;
+    Text overText;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,8 @@ public class TweenScripts : MonoBehaviour
         backEye = GameObject.FindGameObjectWithTag("backEye");
         eyeMenu.SetActive(false);
         mainMenu = GameObject.FindGameObjectWithTag("mainMenu");
+        overText = GameObject.Find("overtext").GetComponent<Text>();
+        overText.text = "";
     }
 
     // Update is called once per frame
@@ -45,7 +49,8 @@ public class TweenScripts : MonoBehaviour
         FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
         StartCoroutine(PlaySelectTouch());
         NUIManager.Instance.typeOfNUI = 1;
-        NUIManager.Instance.someWord = "Tap the screen";
+        NUIManager.Instance.someWord = "Touch Mode";
+        overText.text = "Eyetracker mode";
     }
 
     IEnumerator PlaySelectTouch()
@@ -82,7 +87,8 @@ public class TweenScripts : MonoBehaviour
         FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
         StartCoroutine(PlaySelectEye());
         NUIManager.Instance.typeOfNUI = 2;
-        NUIManager.Instance.someWord = "Look around";
+        NUIManager.Instance.someWord = "Eyetracker mode";
+        overText.text = "Eyetracker mode";
     }
 
     IEnumerator PlaySelectEye()
