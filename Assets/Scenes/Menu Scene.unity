@@ -1526,7 +1526,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 47e8b464a644bf245800405bc90c6a78, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.01
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1636,6 +1636,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3cfd5b85bb721d4986df5ac1f060df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sounds:
+  - name: Drop
+    sound_clip: {fileID: 8300000, guid: 480d65c36074f3541be400d6f2d57680, type: 3}
+    volume: 0.8
+    pitch: 1
+    source: {fileID: 0}
+  - name: Splash
+    sound_clip: {fileID: 8300000, guid: 761f8d9d50fca4e43b6145e9c1a7c814, type: 3}
+    volume: 1
+    pitch: 0.5
+    source: {fileID: 0}
 --- !u!1 &1188087453
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,8 +35,10 @@ public class FollowMouse : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
+                //If raycast hits fish, tween fish
                 if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, interactiveLayer) && (Vector3.Distance(new Vector3(hit.point.x, hit.point.y, hit.point.z), transform.position)) > stopping_distance)
                 {
+                    //add water ripple
                     targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
                 }
             }
@@ -61,9 +63,6 @@ public class FollowMouse : MonoBehaviour
                         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
                     }
                     transform.LookAt(targetPosition);
-
-                    // Note: Values can be negative if the user looks outside the game view. 
-                    // print("Gaze point on Screen (X,Y): " + gazePoint.Screen.x + ", " + gazePoint.Screen.y);
                 }
             }
             else
