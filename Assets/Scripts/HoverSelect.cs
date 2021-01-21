@@ -7,6 +7,7 @@ public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     public GameObject Image;
     private IEnumerator coroutine;
+    public Button thisButton;
     //private bool tweening;
 
     // Start is called before the first frame update
@@ -18,28 +19,9 @@ public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     // Update is called once per frame
     void Update()
     {
-        //if (IsMouseOverButton())
-        //{
-        //    tweening = true;
-        //    LeanTween.scale(Image, Vector3.one, 3f).setEasePunch();
-        //}
-        //if (tweening && !IsMouseOverButton())
-        //{
-        //    LeanTween.scale(Image, Vector3.zero, 0.5f);
-        //    Image.transform.localScale = Vector3.zero;
-        //    tweening = false;
-        //}
-
+        
     }
-    //private bool IsMouseOverButton()
-    //{
-    //    return EventSystem.current.IsPointerOverGameObject();
-    //}
-    //private void OnMouseExit()
-    //{
-    //    LeanTween.cancel(Image);
-    //    //Image.transform.localScale = Vector3.zero;
-    //}
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (NUIManager.Instance.typeOfNUI == 2)
@@ -73,15 +55,6 @@ public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     IEnumerator CountToSelect()
     {
         yield return new WaitForSeconds(3);
-        if (this.gameObject.name == "TouchButton")
-        {
-            Debug.Log("Touch Button Pressed");
-        }
-
-        if (this.gameObject.name == "EyeButton")
-        {
-            Debug.Log("Eye Button Pressed");
-        }
-
+        thisButton.onClick.Invoke();
     }
 }
