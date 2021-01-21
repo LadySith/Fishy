@@ -23,6 +23,7 @@ TagManager:
   - RightSphere
   - LeftSphere
   - overtext
+  - TopSphere
   layers:
   - Default
   - TransparentFX

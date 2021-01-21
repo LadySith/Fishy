@@ -36,10 +36,10 @@ public class FollowMouse : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                //If raycast hits fish, tween fish
+                //TODO: If raycast hits fish, tween fish
                 if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, interactiveLayer) && (Vector3.Distance(new Vector3(hit.point.x, hit.point.y, hit.point.z), transform.position)) > stopping_distance)
                 {
-                    //add water ripple
+                    //TODO: add water ripple
                     targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
                 }
             }
