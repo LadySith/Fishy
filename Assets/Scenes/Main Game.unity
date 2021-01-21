@@ -2823,8 +2823,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PointCloudSize: 5
   PointSprite: {fileID: 21300000, guid: c514805d788f4834fb6e81bf9d81a45c, type: 3}
-  PointScale: 1
-  VisualizationDistance: 10
+  PointScale: 0.03
+  VisualizationDistance: 2
   FilterSmoothingFactor: 0.528
 --- !u!1 &2679525788267394702
 GameObject:
