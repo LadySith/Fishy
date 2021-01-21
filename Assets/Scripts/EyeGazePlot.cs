@@ -4,6 +4,7 @@
 
 using UnityEngine;
 using Tobii.Gaming;
+using System.Runtime.InteropServices;
 
 /// <summary>
 /// Draws the gaze point positions as a point cloud, or, if the use filtering
@@ -54,27 +55,35 @@ public class EyeGazePlot : MonoBehaviour
         UpdateGazeBubbleVisibility();
     }
 
+    [DllImport("user32.dll")] //added to make eye gaze determine "mouse" position
+    static extern bool SetCursorPos(float X, float Y); //added to make eye gaze determine "mouse" position
+
     void Update()
     {
         GazePoint gazePoint = TobiiAPI.GetGazePoint();
 
-        if (gazePoint.IsRecent()
-            && gazePoint.Timestamp > (_lastGazePoint.Timestamp + float.Epsilon))
+        if (NUIManager.Instance.typeOfNUI == 2)
         {
-            if (UseFilter)
+            if (gazePoint.IsRecent()
+            && gazePoint.Timestamp > (_lastGazePoint.Timestamp + float.Epsilon))
             {
-                UpdateGazeBubblePosition(gazePoint);
-            }
-            else
-            {
-                UpdateGazePointCloud(gazePoint);
+                if (UseFilter)
+                {
+                    UpdateGazeBubblePosition(gazePoint);
+                }
+                else
+                {
+                    UpdateGazePointCloud(gazePoint);
+                }
+
+                _lastGazePoint = gazePoint;
+                Vector2 gazePosition = _lastGazePoint.Screen;
+                SetCursorPos(gazePosition.x, gazePosition.y);
             }
 
-            _lastGazePoint = gazePoint;
+            UpdateGazePointCloudVisibility();
+            UpdateGazeBubbleVisibility();
         }
-
-        UpdateGazePointCloudVisibility();
-        UpdateGazeBubbleVisibility();
     }
 
     private void InitializeGazePointBuffer()
