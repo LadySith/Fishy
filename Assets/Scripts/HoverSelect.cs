@@ -3,47 +3,43 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using Tobii.Gaming;
-
 public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject Image;
     private IEnumerator coroutine;
-    private IEnumerator subcoroutine;
     //private bool tweening;
-
-    public float tweenDuration;
-    public Animator transition;
-
-    GameObject mainMenu;
-    GameObject touchButton;
-    GameObject touchMenu;
-    GameObject beginTouch;
-    GameObject backTouch;
-    GameObject eyeButton;
-    GameObject eyeMenu;
-    GameObject beginEye;
-    GameObject backEye;
-    Text overText;
 
     // Start is called before the first frame update
     void Start()
     {
         Image.transform.localScale = Vector3.zero;
-
-        touchButton = GameObject.FindGameObjectWithTag("touchButton");
-        touchMenu = GameObject.FindGameObjectWithTag("touchMenu");
-        beginTouch = GameObject.FindGameObjectWithTag("beginTouch");
-        backTouch = GameObject.FindGameObjectWithTag("backTouch");
-        eyeButton = GameObject.FindGameObjectWithTag("eyeButton");
-        eyeMenu = GameObject.FindGameObjectWithTag("eyeMenu");
-        beginEye = GameObject.FindGameObjectWithTag("beginEye");
-        backEye = GameObject.FindGameObjectWithTag("backEye");
-        mainMenu = GameObject.FindGameObjectWithTag("mainMenu");
-        overText = GameObject.Find("OverheadText").GetComponent<Text>();
+        //tweening = false;
     }
+    // Update is called once per frame
+    void Update()
+    {
+        //if (IsMouseOverButton())
+        //{
+        //    tweening = true;
+        //    LeanTween.scale(Image, Vector3.one, 3f).setEasePunch();
+        //}
+        //if (tweening && !IsMouseOverButton())
+        //{
+        //    LeanTween.scale(Image, Vector3.zero, 0.5f);
+        //    Image.transform.localScale = Vector3.zero;
+        //    tweening = false;
+        //}
 
+    }
+    //private bool IsMouseOverButton()
+    //{
+    //    return EventSystem.current.IsPointerOverGameObject();
+    //}
+    //private void OnMouseExit()
+    //{
+    //    LeanTween.cancel(Image);
+    //    //Image.transform.localScale = Vector3.zero;
+    //}
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (NUIManager.Instance.typeOfNUI == 2)
@@ -59,12 +55,11 @@ public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             LeanTween.scale(Image, Vector3.zero, 0.5f).setEaseOutExpo();
         }
     }
-
     public void OnPointerExit(PointerEventData eventData)
     {
         if (NUIManager.Instance.typeOfNUI == 2)
         {
-            StopAllCoroutines();
+            StopCoroutine(coroutine);
             LeanTween.cancel(Image);
             LeanTween.scale(Image, Vector3.zero, 0.5f).setEaseOutExpo();
             //Debug.Log("Pointer Exited Button: " + gameObject.name);
@@ -75,183 +70,18 @@ public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             LeanTween.scale(Image, Vector3.zero, 0.5f).setEaseOutExpo();
         }
     }
-
     IEnumerator CountToSelect()
     {
         yield return new WaitForSeconds(3);
         if (this.gameObject.name == "TouchButton")
         {
             Debug.Log("Touch Button Pressed");
-            SelectTouch();
         }
 
         if (this.gameObject.name == "EyeButton")
         {
             Debug.Log("Eye Button Pressed");
-            SelectEye();
         }
 
     }
-
-    public void SelectTouch()
-    {
-        FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
-        subcoroutine = PlaySelectTouch();
-        StartCoroutine(subcoroutine);
-        NUIManager.Instance.typeOfNUI = 1;
-        NUIManager.Instance.someWord = "Touch Mode";
-        overText.text = NUIManager.Instance.someWord;
-    }
-
-    IEnumerator PlaySelectTouch()
-    {
-        LeanTween.cancel(touchButton); //make sure this references the correct object when needed
-        touchButton.transform.localScale = Vector3.one;
-        LeanTween.scale(touchButton, Vector3.one * 1.2f, tweenDuration).setEasePunch();
-        yield return new WaitForSeconds(tweenDuration + 0.5f);
-        touchMenu.transform.localScale = Vector3.zero;
-        touchMenu.SetActive(true);
-        subcoroutine = OpenTouchPanel();
-        StartCoroutine(subcoroutine);
-        mainMenu.SetActive(false);
-
-    }
-
-    IEnumerator OpenTouchPanel()
-    {
-        LeanTween.scale(touchMenu, Vector3.one, tweenDuration / 2);
-        yield return new WaitForSeconds(tweenDuration / 2);
-        touchMenu.transform.localScale = Vector3.one;
-    }
-
-    IEnumerator CloseTouchPanel()
-    {
-        mainMenu.SetActive(true);
-        LeanTween.scale(touchMenu, Vector3.zero, tweenDuration / 2);
-        yield return new WaitForSeconds(tweenDuration / 2);
-        touchMenu.transform.localScale = Vector3.zero;
-        touchMenu.SetActive(false);
-    }
-
-    public void SelectEye()
-    {
-        FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
-        subcoroutine = PlaySelectEye();
-        StartCoroutine(subcoroutine);
-        NUIManager.Instance.typeOfNUI = 2;
-    }
-
-    IEnumerator PlaySelectEye()
-    {
-        LeanTween.cancel(eyeButton); //make sure this references the correct object when needed
-        eyeButton.transform.localScale = Vector3.one;
-        LeanTween.scale(eyeButton, Vector3.one * 1.2f, tweenDuration).setEasePunch();
-        yield return new WaitForSeconds(tweenDuration + 0.5f);
-        eyeMenu.transform.localScale = Vector3.zero;
-        eyeMenu.SetActive(true);
-        subcoroutine = OpenEyePanel();
-        StartCoroutine(subcoroutine);
-        mainMenu.SetActive(false);
-    }
-
-    IEnumerator OpenEyePanel()
-    {
-        LeanTween.scale(eyeMenu, Vector3.one, tweenDuration / 2);
-        yield return new WaitForSeconds(tweenDuration / 2);
-        eyeMenu.transform.localScale = Vector3.one;
-    }
-
-    IEnumerator CloseEyePanel()
-    {
-        mainMenu.SetActive(true);
-        LeanTween.scale(eyeMenu, Vector3.zero, tweenDuration / 2);
-        yield return new WaitForSeconds(tweenDuration / 2);
-        eyeMenu.transform.localScale = Vector3.zero;
-        eyeMenu.SetActive(false);
-    }
-
-    public void BeginTouch()
-    {
-        FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
-        subcoroutine = PlayBeginTouch();
-        StartCoroutine(subcoroutine);
-    }
-
-    public void BeginEye()
-    {
-        FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
-        subcoroutine = PlayBeginEye();
-        StartCoroutine(subcoroutine);
-    }
-
-    public void BackTouch()
-    {
-        FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
-        subcoroutine = PlayBackTouch();
-        StartCoroutine(subcoroutine);
-    }
-
-    public void BackEye()
-    {
-        FindObjectOfType<MusicManager>().PlaySound("Drop"); //Play Drop sound from MusicManager sound array
-        subcoroutine = PlayBackEye();
-        StartCoroutine(subcoroutine);
-    }
-
-    IEnumerator PlayBackEye()
-    {
-        LeanTween.cancel(backEye); //make sure this references the correct object when needed
-        backEye.transform.localScale = Vector3.one;
-        LeanTween.scale(backEye, Vector3.one * 1.2f, tweenDuration).setEasePunch();
-        yield return new WaitForSeconds(tweenDuration + 0.5f);
-        subcoroutine = CloseEyePanel();
-        StartCoroutine(subcoroutine);
-    }
-
-    IEnumerator PlayBackTouch()
-    {
-        LeanTween.cancel(backTouch); //make sure this references the correct object when needed
-        backTouch.transform.localScale = Vector3.one;
-        LeanTween.scale(backTouch, Vector3.one * 1.2f, tweenDuration).setEasePunch();
-        yield return new WaitForSeconds(tweenDuration + 0.5f);
-        subcoroutine = CloseTouchPanel();
-        StartCoroutine(subcoroutine);
-    }
-
-    IEnumerator PlayBeginEye()
-    {
-        LeanTween.cancel(beginEye); //make sure this references the correct object when needed
-        beginEye.transform.localScale = Vector3.one;
-        LeanTween.scale(beginEye, Vector3.one * 1.2f, tweenDuration).setEasePunch();
-        yield return new WaitForSeconds(tweenDuration + 0.5f);
-        subcoroutine = TransitionToEye();
-        StartCoroutine(subcoroutine);
-    }
-
-    IEnumerator TransitionToEye()
-    {
-        transition.SetTrigger("Start");
-        yield return new WaitForSeconds(0.8f);
-        SceneManager.LoadScene("Main Game");
-        Debug.Log("Starting Game With Eye-Tracking");
-    }
-
-    IEnumerator PlayBeginTouch()
-    {
-        LeanTween.cancel(beginTouch); //make sure this references the correct object when needed
-        beginTouch.transform.localScale = Vector3.one;
-        LeanTween.scale(beginTouch, Vector3.one * 1.2f, tweenDuration).setEasePunch();
-        yield return new WaitForSeconds(tweenDuration + 0.5f);
-        subcoroutine = TransitionToTouch();
-        StartCoroutine(subcoroutine);
-    }
-
-    IEnumerator TransitionToTouch()
-    {
-        transition.SetTrigger("Start");
-        yield return new WaitForSeconds(0.8f);
-        SceneManager.LoadScene("Main Game");
-        Debug.Log("Starting Game With Touch");
-    }
-
 }
