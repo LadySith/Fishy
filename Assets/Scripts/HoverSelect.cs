@@ -8,14 +8,13 @@ public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public GameObject Image;
     private IEnumerator coroutine;
     public Button thisButton;
-    //private bool tweening;
 
     // Start is called before the first frame update
     void Start()
     {
         Image.transform.localScale = Vector3.zero;
-        //tweening = false;
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -27,7 +26,6 @@ public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (NUIManager.Instance.typeOfNUI == 2)
         {
             LeanTween.scale(Image, Vector3.one, 3f).setEaseOutQuad();
-            //Debug.Log("Pointer Entered Button: " + gameObject.name);
             coroutine = CountToSelect();
             StartCoroutine(coroutine);
         }
@@ -44,7 +42,6 @@ public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             StopCoroutine(coroutine);
             LeanTween.cancel(Image);
             LeanTween.scale(Image, Vector3.zero, 0.5f).setEaseOutExpo();
-            //Debug.Log("Pointer Exited Button: " + gameObject.name);
         }
 
         else
@@ -55,6 +52,7 @@ public class HoverSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     IEnumerator CountToSelect()
     {
         yield return new WaitForSeconds(3);
+        Image.transform.localScale = Vector3.zero;
         thisButton.onClick.Invoke();
     }
 }
